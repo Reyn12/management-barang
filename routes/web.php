@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\LogViewerController;
 
 // Auth Routes (tanpa middleware)
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -54,4 +55,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/excel', [TransaksiController::class, 'downloadExcel'])->name('transaksi.download.excel');
         Route::get('/transaksi/invoice/{id}', [TransaksiController::class, 'downloadInvoice'])->name('transaksi.download-invoice');
     });
+
+    // Log Viewer
+    Route::get('/log-viewer', [LogViewerController::class, 'index'])->name('log-viewer');
 });

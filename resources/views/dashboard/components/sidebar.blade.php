@@ -61,5 +61,19 @@
                 @endif
             </a>
         </div>
+
+        <span class="text-xs font-medium text-gray-400 block mb-3 mt-6">TOOLS</span>
+        <div class="space-y-3">
+            <a href="{{ route('log-viewer') }}" 
+                class=" px-4 py-2 rounded-lg flex items-center justify-between {{ request()->routeIs('log-viewer') ? 'bg-white text-blue-600' : 'text-gray-600 hover:bg-white' }}">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-file-alt w-5"></i>
+                    <span>Log Viewer</span>
+                </div>
+                @if(request()->routeIs('log-viewer'))
+                    <i class="fas fa-chevron-right text-sm"></i>
+                @endif
+            </a>
+        </div>
     </nav>
 </div>
