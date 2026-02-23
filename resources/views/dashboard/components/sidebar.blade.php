@@ -84,6 +84,16 @@
                     <i class="fas fa-chevron-right text-sm"></i>
                 @endif
             </a>
+            <a href="{{ route('system-monitor') }}" 
+                class=" px-4 py-2 rounded-lg flex items-center justify-between {{ request()->routeIs('system-monitor') ? 'bg-white text-blue-600' : 'text-gray-600 hover:bg-white' }}">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-heartbeat w-5"></i>
+                    <span>System Monitor</span>
+                </div>
+                @if(request()->routeIs('system-monitor'))
+                    <i class="fas fa-chevron-right text-sm"></i>
+                @endif
+            </a>
         </div>
     </nav>
 </div>

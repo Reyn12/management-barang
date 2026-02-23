@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LogViewerController;
 use App\Http\Controllers\AboutToolsController;
+use App\Http\Controllers\SystemMonitorController;
 
 // Auth Routes (tanpa middleware)
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -62,4 +63,7 @@ Route::middleware('auth')->group(function () {
 
     // About & Tools
     Route::get('/about-tools', [AboutToolsController::class, 'index'])->name('about-tools');
+
+    // System Monitor
+    Route::get('/system-monitor', [SystemMonitorController::class, 'index'])->name('system-monitor');
 });
