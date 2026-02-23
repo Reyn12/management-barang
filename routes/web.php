@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LogViewerController;
+use App\Http\Controllers\AboutToolsController;
 
 // Auth Routes (tanpa middleware)
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -58,4 +59,7 @@ Route::middleware('auth')->group(function () {
 
     // Log Viewer
     Route::get('/log-viewer', [LogViewerController::class, 'index'])->name('log-viewer');
+
+    // About & Tools
+    Route::get('/about-tools', [AboutToolsController::class, 'index'])->name('about-tools');
 });
