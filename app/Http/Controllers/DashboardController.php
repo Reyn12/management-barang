@@ -131,45 +131,34 @@ class DashboardController extends Controller
             $persentaseSupplier = (($totalSupplier - $supplierSebelumnya) / $supplierSebelumnya) * 100;
         }
 
-        // Hitung jumlah transaksi per status
-        $pendingCount = Transaksi::where('status_bayar', 'Pending')
+        // Hitung jumlah transaksi per status (Belum Bayar | Sudah Bayar)
+        $belumBayarCount = Transaksi::where('status_bayar', 'Belum Bayar')
             ->where('tgl_jual', '>=', $startDate)
             ->count();
-        $suksesCount = Transaksi::where('status_bayar', 'Sukses')
+        $sudahBayarCount = Transaksi::where('status_bayar', 'Sudah Bayar')
             ->where('tgl_jual', '>=', $startDate)
             ->count();
-        $gagalCount = Transaksi::where('status_bayar', 'Gagal')
-            ->where('tgl_jual', '>=', $startDate)
-            ->count();
-        
-        $pendingTotal = Transaksi::where('status_bayar', 'Pending')
+
+        $belumBayarTotal = Transaksi::where('status_bayar', 'Belum Bayar')
             ->where('tgl_jual', '>=', $startDate)
             ->sum('total_harga');
-        $suksesTotal = Transaksi::where('status_bayar', 'Sukses')
+        $sudahBayarTotal = Transaksi::where('status_bayar', 'Sudah Bayar')
             ->where('tgl_jual', '>=', $startDate)
             ->sum('total_harga');
-        $gagalTotal = Transaksi::where('status_bayar', 'Gagal')
-            ->where('tgl_jual', '>=', $startDate)
-            ->sum('total_harga');        
+
         // Data untuk chart 7 hari terakhir
         $dates = collect(range(6, 0))->map(function ($days) {
             return Carbon::now()->subDays($days)->format('Y-m-d');
         });
 
-        $pendingSeries = $dates->map(function ($date) {
-            return Transaksi::where('status_bayar', 'Pending')
+        $belumBayarSeries = $dates->map(function ($date) {
+            return Transaksi::where('status_bayar', 'Belum Bayar')
                 ->whereDate('created_at', $date)
                 ->count();
         })->values();
 
-        $suksesSeries = $dates->map(function ($date) {
-            return Transaksi::where('status_bayar', 'Sukses')
-                ->whereDate('created_at', $date)
-                ->count();
-        })->values();
-
-        $gagalSeries = $dates->map(function ($date) {
-            return Transaksi::where('status_bayar', 'Gagal')
+        $sudahBayarSeries = $dates->map(function ($date) {
+            return Transaksi::where('status_bayar', 'Sudah Bayar')
                 ->whereDate('created_at', $date)
                 ->count();
         })->values();
@@ -196,16 +185,13 @@ class DashboardController extends Controller
             'categories',
             'stockData',
             'salesData',
-            'pendingCount',
-            'suksesCount',
-            'gagalCount',
-            'pendingSeries',
-            'suksesSeries',
-            'gagalSeries',
+            'belumBayarCount',
+            'sudahBayarCount',
+            'belumBayarSeries',
+            'sudahBayarSeries',
             'dates',
-            'pendingTotal',
-            'suksesTotal',
-            'gagalTotal'
+            'belumBayarTotal',
+            'sudahBayarTotal'
         ));
     }
 }

@@ -99,9 +99,8 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">Filter by Status</label>
                 <select x-model="selectedStatus" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                     <option value="all">Semua Status</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Sukses">Sukses</option>
-                    <option value="Gagal">Gagal</option>
+                    <option value="Belum Bayar">Belum Bayar</option>
+                    <option value="Sudah Bayar">Sudah Bayar</option>
                 </select>
             </div>
 
@@ -209,11 +208,12 @@
                                     <p x-show="errorStok" x-text="errorStok" class="mt-1 text-sm text-red-600"></p>
                                 </div>
 
-                                <!-- Tanggal Jual -->
+                                <!-- Tanggal Penjualan -->
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Jual</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Penjualan</label>
                                     <input type="date" 
                                            name="tgl_jual" 
+                                           value="{{ date('Y-m-d') }}"
                                            required
                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200">
                                 </div>
@@ -236,10 +236,8 @@
                                 <select name="status_bayar" 
                                         required 
                                         class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200">
-                                    <option value="">Pilih Status</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Sukses">Sukses</option>
-                                    <option value="Gagal">Gagal</option>
+                                    <option value="Belum Bayar">Belum Bayar</option>
+                                    <option value="Sudah Bayar" selected>Sudah Bayar</option>
                                 </select>
                             </div>
                         </div>

@@ -401,7 +401,7 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        // Data Transaksi
+        // Data Transaksi (status_bayar: Belum Bayar | Sudah Bayar)
         DB::table('transaksis')->insert([
             [
                 'kode_transaksi' => 'TRX-0001',
@@ -409,7 +409,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2025-01-21',
                 'jumlah' => 2,
                 'total_harga' => 24000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -419,7 +419,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2025-01-21', 
                 'jumlah' => 1,
                 'total_harga' => 15000000,
-                'status_bayar' => 'Pending',
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -429,7 +429,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2025-01-15',
                 'jumlah' => 1,
                 'total_harga' => 13500000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -439,7 +439,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-12-28',
                 'jumlah' => 2,
                 'total_harga' => 37800000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -449,7 +449,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-12-25',
                 'jumlah' => 3,
                 'total_harga' => 25500000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -459,7 +459,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-12-10',
                 'jumlah' => 1,
                 'total_harga' => 14500000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -469,7 +469,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-11-30',
                 'jumlah' => 2,
                 'total_harga' => 33600000,
-                'status_bayar' => 'Pending',
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -479,7 +479,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-11-15',
                 'jumlah' => 4,
                 'total_harga' => 19200000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -489,7 +489,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-10-28',
                 'jumlah' => 2,
                 'total_harga' => 19800000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -499,7 +499,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-10-15',
                 'jumlah' => 1,
                 'total_harga' => 17500000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -509,7 +509,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-09-30',
                 'jumlah' => 3,
                 'total_harga' => 36000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -519,7 +519,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-09-15',
                 'jumlah' => 2,
                 'total_harga' => 27000000,
-                'status_bayar' => 'Pending',
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -529,7 +529,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-08-30',
                 'jumlah' => 2,
                 'total_harga' => 17000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -539,7 +539,7 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-08-15',
                 'jumlah' => 1,
                 'total_harga' => 16800000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -549,108 +549,108 @@ class DatabaseSeeder extends Seeder
                 'tgl_jual' => '2024-08-01',
                 'jumlah' => 3,
                 'total_harga' => 29700000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            // tambahan
+            // tambahan (kode unik TRX-0016 s/d TRX-0025)
             [
-                'kode_transaksi' => 'TRX-0006',
+                'kode_transaksi' => 'TRX-0016',
                 'id_produk' => 6,
                 'tgl_jual' => '2025-01-24',
                 'jumlah' => 1,
                 'total_harga' => 21000000,
-                'status_bayar' => 'Pending',
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0007',
+                'kode_transaksi' => 'TRX-0017',
                 'id_produk' => 7,
                 'tgl_jual' => '2025-01-23',
                 'jumlah' => 2,
                 'total_harga' => 26000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0008',
+                'kode_transaksi' => 'TRX-0018',
                 'id_produk' => 8,
                 'tgl_jual' => '2025-01-22',
                 'jumlah' => 1,
                 'total_harga' => 12500000,
-                'status_bayar' => 'Gagal',  // Diubah dari 'Dibatalkan'
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0009',
+                'kode_transaksi' => 'TRX-0019',
                 'id_produk' => 9,
                 'tgl_jual' => '2025-01-20',
                 'jumlah' => 1,
                 'total_harga' => 28000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0010',
+                'kode_transaksi' => 'TRX-0020',
                 'id_produk' => 10,
                 'tgl_jual' => '2025-01-19',
                 'jumlah' => 3,
                 'total_harga' => 33000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0011',
+                'kode_transaksi' => 'TRX-0021',
                 'id_produk' => 11,
                 'tgl_jual' => '2025-01-18',
                 'jumlah' => 2,
                 'total_harga' => 33600000,
-                'status_bayar' => 'Pending',
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0012',
+                'kode_transaksi' => 'TRX-0022',
                 'id_produk' => 12,
                 'tgl_jual' => '2025-01-17',
                 'jumlah' => 1,
                 'total_harga' => 32000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0013',
+                'kode_transaksi' => 'TRX-0023',
                 'id_produk' => 1,
                 'tgl_jual' => '2025-01-16',
                 'jumlah' => 2,
                 'total_harga' => 24000000,
-                'status_bayar' => 'Gagal',  // Diubah dari 'Dibatalkan'
+                'status_bayar' => 'Belum Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0014',
+                'kode_transaksi' => 'TRX-0024',
                 'id_produk' => 2,
                 'tgl_jual' => '2025-01-15',
                 'jumlah' => 1,
                 'total_harga' => 15000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'kode_transaksi' => 'TRX-0015',
+                'kode_transaksi' => 'TRX-0025',
                 'id_produk' => 3,
                 'tgl_jual' => '2025-01-14',
                 'jumlah' => 2,
                 'total_harga' => 27000000,
-                'status_bayar' => 'Sukses',
+                'status_bayar' => 'Sudah Bayar',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

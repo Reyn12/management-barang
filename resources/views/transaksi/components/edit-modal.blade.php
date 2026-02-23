@@ -86,8 +86,8 @@
                                                 Status Bayar
                                             </label>
                                             <select name="status_bayar" id="status_bayar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                                <option value="Sukses" {{ $transaksi->status_bayar == 'Sukses' ? 'selected' : '' }}>Sukses</option>
-                                                <option value="Pending" {{ $transaksi->status_bayar == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="Belum Bayar" {{ $transaksi->status_bayar == 'Belum Bayar' ? 'selected' : '' }}>Belum Bayar</option>
+                                                <option value="Sudah Bayar" {{ $transaksi->status_bayar == 'Sudah Bayar' ? 'selected' : '' }}>Sudah Bayar</option>
                                             </select>
                                         </div>
                                     </div>

@@ -110,7 +110,7 @@ class TransaksiController extends Controller
             'tgl_jual' => 'required|date',
             'jumlah' => 'required|integer|min:1',
             'total_harga' => 'required|numeric|min:0',
-            'status_bayar' => 'required|in:Pending,Sukses,Gagal',
+            'status_bayar' => 'required|in:Belum Bayar,Sudah Bayar',
         ]);
     
         try {
@@ -177,7 +177,7 @@ class TransaksiController extends Controller
             'id_produk' => 'required',
             'jumlah' => 'required|numeric',
             'tgl_jual' => 'required|date',
-            'status_bayar' => 'required'
+            'status_bayar' => 'required|in:Belum Bayar,Sudah Bayar'
         ]);
     
         try {

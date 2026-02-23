@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_produk')->constrained('produks', 'id_produk')->onDelete('cascade');
             $table->date('tgl_jual');
             $table->integer('jumlah');
-            $table->enum('status_bayar', ['Pending', 'Sukses', 'Gagal']);
+            $table->enum('status_bayar', ['Belum Bayar', 'Sudah Bayar']);
             $table->decimal('total_harga', 12, 2);
             $table->timestamps();
         });
