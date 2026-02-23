@@ -109,9 +109,10 @@ class ProdukController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Produk $produk)
+    public function show($id)
     {
-        //
+        $produk = Produk::with('supplier')->findOrFail($id);
+        return view('produk.show', compact('produk'));
     }
 
     /**

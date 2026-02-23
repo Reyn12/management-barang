@@ -34,11 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::prefix('produk')->group(function () {
         Route::get('/', [ProdukController::class, 'index'])->name('produk.produk');
         Route::post('/', [ProdukController::class, 'store'])->name('produk.store');
+        Route::get('/download/pdf', [ProdukController::class, 'downloadPDF'])->name('produk.download.pdf');
+        Route::get('/download/excel', [ProdukController::class, 'downloadExcel'])->name('produk.download.excel');
+        Route::get('/{id}', [ProdukController::class, 'show'])->name('produk.show');
         Route::get('/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
         Route::put('/{id}', [ProdukController::class, 'update'])->name('produk.update');
         Route::delete('/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
-        Route::get('/download/pdf', [ProdukController::class, 'downloadPDF'])->name('produk.download.pdf');
-        Route::get('/download/excel', [ProdukController::class, 'downloadExcel'])->name('produk.download.excel');
     });
 
     // Transaksi
