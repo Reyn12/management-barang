@@ -28,12 +28,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @foreach($tools as $tool)
             <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 {{ $tool['color'] }} rounded-xl flex items-center justify-center">
-                        <i class="{{ $tool['icon'] }} fa-fw text-white text-xl"></i>
-                    </div>
-                    <span class="font-semibold text-gray-800">{{ $tool['name'] }}</span>
-                </div>
+                <span class="font-semibold text-gray-800 block mb-2">{{ $tool['name'] }}</span>
                 <p class="text-lg font-mono font-medium text-gray-900 truncate" title="{{ $tool['value'] }}">{{ $tool['value'] }}</p>
             </div>
             @endforeach

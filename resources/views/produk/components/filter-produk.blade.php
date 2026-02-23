@@ -76,40 +76,8 @@
         </div>
     </div>
 
-    <!-- Tombol Download tetap sama -->
-    <div x-data="{
-        showDownloadModal: false,
-        downloadPDF() {
-            const currentUrl = new URL(window.location.href);
-            const searchParams = currentUrl.searchParams;
-            // Tambahkan parameter kategori jika ada
-            if ('{{ request("kategori") }}') {
-                searchParams.set('kategori', '{{ request("kategori") }}');
-            }
-            window.location.href = `/produk/download/pdf?${searchParams.toString()}`;
-            this.showDownloadModal = false;
-        },
-        downloadExcel() {
-            const currentUrl = new URL(window.location.href);
-            const searchParams = currentUrl.searchParams;
-            // Tambahkan parameter kategori jika ada
-            if ('{{ request("kategori") }}') {
-                searchParams.set('kategori', '{{ request("kategori") }}');
-            }
-            window.location.href = `/produk/download/excel?${searchParams.toString()}`;
-            this.showDownloadModal = false;
-        },
-    }" class="mr-4">
-        <button type="button" @click="showDownloadModal = true" 
-            class="flex items-center gap-2 bg-gradient-to-r from-blue-700 to-blue-900 text-white px-6 py-2 rounded-lg hover:from-blue-800 hover:to-blue-950">
-            <i class="fas fa-download"></i>
-            <span>Download</span>
-        </button>
-        @include('produk.components.modal-download')
-    </div>
-
-    <!-- Tombol Tambah tetap sama -->
-    <div x-data>
+    <!-- Tombol Tambah -->
+    <div>
         <button 
             @click="$dispatch('open-modal')"
             class="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700"

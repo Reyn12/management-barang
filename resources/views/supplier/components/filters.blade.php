@@ -15,28 +15,8 @@
         </div> 
     </div>
 
-    <!-- Tombol Download -->
-    <div x-data="{
-        showDownloadModal: false,
-        downloadPDF() {
-            window.location.href = '/supplier/download/pdf';
-            this.showDownloadModal = false;
-        },
-        downloadExcel() {
-            window.location.href = '/supplier/download/excel';
-            this.showDownloadModal = false;
-        }
-    }" class="mr-4">
-        <button type="button" @click="showDownloadModal = true" 
-            class="flex items-center gap-2 bg-gradient-to-r from-blue-700 to-blue-900 text-white px-6 py-2 rounded-lg hover:from-blue-800 hover:to-blue-950">
-            <i class="fas fa-download"></i>
-            <span>Download</span>
-        </button>
-        @include('supplier.components.modal-download')
-    </div>
-
     <!-- Tombol Tambah -->
-    <div x-data>
+    <div>
         <button 
             @click="$dispatch('open-modal')"
             class="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700"

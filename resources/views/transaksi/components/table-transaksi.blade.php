@@ -29,11 +29,6 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
-                            {{-- Download Invoice Button --}}
-                            <a href="{{ route('transaksi.download-invoice', $transaksi->id_transaksi) }}"
-                                class="p-1.5 bg-green-50 text-green-600 hover:bg-green-100 rounded-lg transition-colors duration-200">
-                                <i class="fas fa-file-download text-lg"></i>
-                            </a>
                             {{-- Edit Button --}}
                             <button type="button"
                                     @click="$dispatch('open-modal-{{ $transaksi->id_transaksi }}')"

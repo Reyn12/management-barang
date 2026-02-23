@@ -17,21 +17,7 @@
 </style>
 @endpush
 <div class="flex items-center justify-between mb-6">
-    <div x-data="{
-        showDownloadModal: false,
-        downloadPDF() {
-            const currentUrl = new URL(window.location.href);
-            const searchParams = currentUrl.searchParams;
-            window.location.href = `/transaksi/download/pdf?${searchParams.toString()}`;
-            this.showDownloadModal = false;
-        },
-        downloadExcel() {
-            const currentUrl = new URL(window.location.href);
-            const searchParams = currentUrl.searchParams;
-            window.location.href = `/transaksi/download/excel?${searchParams.toString()}`;
-            this.showDownloadModal = false;
-        }
-    }" class="flex items-center gap-4 flex-1">
+    <div class="flex items-center gap-4 flex-1">
         <!-- Search Bar -->
         <form action="{{ route('transaksi.index') }}" method="GET">
             <div class="relative">
@@ -113,15 +99,6 @@
         </div>
         </div>
 
-        <!-- Download Button -->
-        <div class="" >
-            <button type="button" @click="showDownloadModal = true" 
-                class="flex items-center gap-2 bg-gradient-to-r from-blue-700 to-blue-900 text-white px-6 py-2 rounded-lg hover:from-blue-800 hover:to-blue-950">
-                <i class="fas fa-download"></i>
-                <span>Download</span>
-            </button>
-            @include('transaksi.components.modal-download')
-        </div>
     </div>
  
     <!-- Tombol Tambah -->
