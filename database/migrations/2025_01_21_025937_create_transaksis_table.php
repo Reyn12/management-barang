@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // SQL: FOREIGN KEY (id_produk) REFERENCES produks(id_produk) ON DELETE CASCADE
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {

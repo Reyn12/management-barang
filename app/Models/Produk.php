@@ -24,6 +24,9 @@ class Produk extends Model
     }
 
     // Relasi ke Transaksi (one-to-many)
+    // J.620100.021.02 – Eloquent ORM
+    // Relasi: satu produk punya banyak transaksi
+    // SQL: SELECT * FROM transaksis WHERE id_produk = {produk.id_produk}
     public function transaksis()
     {
         return $this->hasMany(Transaksi::class, 'id_produk');

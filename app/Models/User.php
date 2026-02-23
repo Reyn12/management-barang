@@ -38,6 +38,9 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    // J.620100.018.02 – Enkapsulasi
+    // $fillable: hanya kolom ini yang boleh di-mass-assign (melindungi field lain).
+    // $hidden: menyembunyikan password & remember_token dari output (JSON/array).
     protected function casts(): array
     {
         return [

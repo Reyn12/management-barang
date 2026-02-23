@@ -16,7 +16,7 @@ class AboutToolsController extends Controller
         $tools[] = [
             'name' => 'PHP',
             'value' => PHP_VERSION,
-            'icon' => 'fab fa-php',
+            'icon' => 'fa-brands fa-php',
             'color' => 'bg-indigo-500',
         ];
 
@@ -24,7 +24,7 @@ class AboutToolsController extends Controller
         $tools[] = [
             'name' => 'Laravel',
             'value' => app()->version(),
-            'icon' => 'fab fa-laravel',
+            'icon' => 'fa-brands fa-laravel',
             'color' => 'bg-red-500',
         ];
 
@@ -33,7 +33,7 @@ class AboutToolsController extends Controller
         $tools[] = [
             'name' => 'Composer',
             'value' => $composerVersion,
-            'icon' => 'fas fa-box',
+            'icon' => 'fa-solid fa-box',
             'color' => 'bg-amber-600',
         ];
 
@@ -42,7 +42,7 @@ class AboutToolsController extends Controller
         $tools[] = [
             'name' => 'Node.js',
             'value' => $nodeVersion,
-            'icon' => 'fab fa-node-js',
+            'icon' => 'fa-brands fa-node-js',
             'color' => 'bg-green-600',
         ];
 
@@ -51,7 +51,7 @@ class AboutToolsController extends Controller
         $tools[] = [
             'name' => 'NPM',
             'value' => $npmVersion,
-            'icon' => 'fab fa-npm',
+            'icon' => 'fa-brands fa-npm',
             'color' => 'bg-red-600',
         ];
 
@@ -95,40 +95,34 @@ class AboutToolsController extends Controller
 
     private function getComposerVersion(): string
     {
-        try {
-            $result = Process::run('composer --version 2>&1');
-            if ($result->successful() && preg_match('/Composer version (\S+)/', $result->output(), $m)) {
-                return $m[1];
-            }
-        } catch (\Throwable $e) {
-            //
+        $output = $this->runCommand('composer --version');
+
+        if ($output && preg_match('/Composer version (\S+)/', $output, $m)) {
+            return $m[1];
         }
-        return class_exists(\Composer\Composer::class) ? '—' : 'Tidak terdeteksi';
+
+        return 'Tidak terdeteksi';
     }
 
     private function getNodeVersion(): string
     {
-        try {
-            $result = Process::run('node -v 2>&1');
-            if ($result->successful()) {
-                return trim(str_replace('v', '', $result->output()));
-            }
-        } catch (\Throwable $e) {
-            //
+        $output = $this->runCommand('node -v');
+
+        if ($output) {
+            return ltrim(trim($output), 'vV ');
         }
+
         return 'Tidak terdeteksi';
     }
 
     private function getNpmVersion(): string
     {
-        try {
-            $result = Process::run('npm -v 2>&1');
-            if ($result->successful()) {
-                return trim($result->output());
-            }
-        } catch (\Throwable $e) {
-            //
+        $output = $this->runCommand('npm -v');
+
+        if ($output) {
+            return trim($output);
         }
+
         return 'Tidak terdeteksi';
     }
 
@@ -155,5 +149,29 @@ class AboutToolsController extends Controller
         $dev = $json['devDependencies'] ?? [];
         $tw = $dev['tailwindcss'] ?? null;
         return $tw ? trim($tw, '^~') : '—';
+    }
+
+    /**
+     * Jalankan perintah shell dengan beberapa fallback (Process & shell_exec).
+     */
+    private function runCommand(string $command): ?string
+    {
+        try {
+            $result = Process::run($command);
+            if ($result->successful() && trim($result->output()) !== '') {
+                return trim($result->output());
+            }
+        } catch (\Throwable $e) {
+            // ignore and try shell_exec below
+        }
+
+        if (function_exists('shell_exec')) {
+            $output = shell_exec($command);
+            if (is_string($output) && trim($output) !== '') {
+                return trim($output);
+            }
+        }
+
+        return null;
     }
 }

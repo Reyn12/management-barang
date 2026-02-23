@@ -1,0 +1,3 @@
+- Di model `User`: enkapsulasi data lewat `$fillable`, `$hidden`, dan `casts()` (password di-hash).
+- Di model `Produk`: enkapsulasi logika URL gambar dalam accessor `getFotoUrlAttribute()`.
+- Di `SystemMonitorController` dan `AboutToolsController`: detail perhitungan dan cara membaca versi tools disimpan di method `private`, sedangkan dari luar hanya pakai method publik `index()`.

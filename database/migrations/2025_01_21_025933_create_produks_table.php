@@ -9,6 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // J.620100.020.02 – SQL (DDL) + ON DELETE CASCADE
+    // SQL: FOREIGN KEY (id_supplier) REFERENCES suppliers(id_supplier) ON DELETE CASCADE
     public function up()
     {
         Schema::create('produks', function (Blueprint $table) {
