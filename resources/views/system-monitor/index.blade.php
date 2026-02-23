@@ -1,3 +1,4 @@
+{{-- J.620100.045.01 - Pemantauan Resource Sistem --}}
 @extends('master')
 
 @section('title', 'System Monitor')
@@ -11,7 +12,7 @@
         <div class="flex items-center justify-between mb-8">
             <div>
                 <h1 class="text-2xl font-semibold flex items-center gap-3">
-                    <i class="fas fa-heartbeat text-rose-500"></i> System Monitor
+                    <i class="fas fa-heartbeat text-rose-500 "></i> System Monitor
                 </h1>
                 <p class="text-sm text-gray-500 mt-1">Monitoring performa, database & konfigurasi server</p>
             </div>

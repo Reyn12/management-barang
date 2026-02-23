@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
+// J.620100.045.01 - Pemantauan Resource Sistem
 class SystemMonitorController extends Controller
 {
     public function index()
