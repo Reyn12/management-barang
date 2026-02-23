@@ -9,6 +9,7 @@ class LogViewerController extends Controller
 {
     public function index(Request $request)
     {
+
         $logPath = storage_path('logs/laravel.log');
 
         if (!File::exists($logPath)) {

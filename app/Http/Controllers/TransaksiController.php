@@ -21,6 +21,32 @@ class TransaksiController extends Controller
      */
     public function index(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /transaksi?search=asus&date=month&status=Belum+Bayar
+        |
+        | SELECT t.*
+        | FROM transaksis t
+        | LEFT JOIN produks p ON t.id_produk = p.id_produk
+        | WHERE
+        |   (:search IS NULL OR (
+        |       p.nama_produk   LIKE '%:search%' OR
+        |       t.id_transaksi  LIKE '%:search%' OR
+        |       t.nama_customer LIKE '%:search%'
+        |   ))
+        |   AND (
+        |       :date IS NULL
+        |       OR (:date = 'today' AND DATE(t.tgl_jual) = CURRENT_DATE)
+        |       OR (:date = 'week'  AND t.tgl_jual BETWEEN start_of_week() AND end_of_week())
+        |       OR (:date = 'month' AND MONTH(t.tgl_jual) = MONTH(CURRENT_DATE)
+        |                            AND YEAR(t.tgl_jual)  = YEAR(CURRENT_DATE))
+        |   )
+        |   AND (:status IS NULL OR :status = 'all' OR t.status_bayar = :status)
+        | ORDER BY t.id_transaksi DESC
+        | LIMIT 10 OFFSET (:page-1)*10;
+        */
 
         // Di awal function, sebelum filter
         Log::info('All Transactions:', [
@@ -105,6 +131,19 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | POST /transaksi
+        |
+        | INSERT INTO transaksis
+        |   (kode_transaksi, nama_customer, id_produk, tgl_jual, jumlah, total_harga, status_bayar)
+        | VALUES
+        |   (:kode_transaksi, :nama_customer, :id_produk, :tgl_jual, :jumlah, :total_harga, :status_bayar);
+        |
+        | (Sebelum insert: cek stok di tabel produks dan kurangi stok-nya.)
+        */
         // Validasi input
         $validated = $request->validate([
             'nama_customer' => 'nullable|string|max:255',
@@ -173,6 +212,23 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | PUT /transaksi/{id}
+        |
+        | UPDATE transaksis
+        | SET nama_customer = :nama_customer,
+        |     id_produk     = :id_produk,
+        |     jumlah        = :jumlah,
+        |     tgl_jual      = :tgl_jual,
+        |     total_harga   = :total_harga,
+        |     status_bayar  = :status_bayar
+        | WHERE id_transaksi = :id;
+        |
+        | (Sebelum update: hitung selisih jumlah dan sesuaikan stok di tabel produks.)
+        */
         $transaksi = Transaksi::findOrFail($id);
         
         $request->validate([
@@ -230,6 +286,14 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | DELETE /transaksi/{id}
+        |
+        | DELETE FROM transaksis WHERE id_transaksi = :id;
+        */
         try {
             $transaksi = Transaksi::findOrFail($id);
             $transaksi->delete();
@@ -242,11 +306,34 @@ class TransaksiController extends Controller
     
     public function export(Request $request) 
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /transaksi/export?... (param filter sama seperti index)
+        |
+        | (Query dasar mirip index, di-build di App\Exports\TransaksiExport,
+        |  lalu diexport ke Excel.)
+        */
         return Excel::download(new TransaksiExport($request), 'transaksi_' . date('Y-m-d') . '.xlsx');
     }
 
     public function downloadPDF(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /transaksi/download/pdf?tanggal_awal=2025-01-01&tanggal_akhir=2025-01-31&status=Sudah+Bayar
+        |
+        | SELECT t.*, p.*
+        | FROM transaksis t
+        | LEFT JOIN produks p ON t.id_produk = p.id_produk
+        | WHERE (:tanggal_awal  IS NULL OR DATE(t.created_at) >= :tanggal_awal)
+        |   AND (:tanggal_akhir IS NULL OR DATE(t.created_at) <= :tanggal_akhir)
+        |   AND (:jenis IS NULL OR t.jenis = :jenis)
+        |   AND (:status IS NULL OR t.status_bayar = :status);
+        */
         $query = Transaksi::with(['produk']);
     
         // Apply filters
@@ -271,11 +358,30 @@ class TransaksiController extends Controller
 
     public function downloadExcel(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /transaksi/download/excel?... (param filter sama seperti export/pdf)
+        |
+        | (Query dasar mirip export/pdf, di-handle di App\Exports\TransaksiExport.)
+        */
         return Excel::download(new TransaksiExport($request), 'transaksi_' . date('Y-m-d') . '.xlsx');
     }
 
     public function downloadInvoice($id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /transaksi/invoice/{id}
+        |
+        | SELECT t.*, p.*
+        | FROM transaksis t
+        | LEFT JOIN produks p ON t.id_produk = p.id_produk
+        | WHERE t.id_transaksi = :id;
+        */
         $transaksi = Transaksi::with('produk')->findOrFail($id);
         
         $pdf = PDF::loadView('transaksi.invoice', [

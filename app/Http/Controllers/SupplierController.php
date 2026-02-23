@@ -17,6 +17,16 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /supplier
+        |
+        | SELECT *
+        | FROM suppliers
+        | ORDER BY created_at DESC;
+        */
         $suppliers = Supplier::latest()->get();
         return view('supplier.supplier', compact('suppliers'));
     }
@@ -35,6 +45,17 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         try {
+            /*
+            |--------------------------------------------------------------------------
+            | SQL Manual Query
+            |--------------------------------------------------------------------------
+            | POST /supplier
+            |
+            | INSERT INTO suppliers
+            |   (nama_supplier, alamat, no_telp, email)
+            | VALUES
+            |   (:nama_supplier, :alamat, :no_telp, :email);
+            */
             $validated = $request->validate([
                 'nama_supplier' => 'required|unique:suppliers,nama_supplier',
                 'alamat' => 'required',
@@ -98,6 +119,19 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            /*
+            |--------------------------------------------------------------------------
+            | SQL Manual Query
+            |--------------------------------------------------------------------------
+            | PUT /supplier/{id}
+            |
+            | UPDATE suppliers
+            | SET nama_supplier = :nama_supplier,
+            |     alamat        = :alamat,
+            |     no_telp       = :no_telp,
+            |     email         = :email
+            | WHERE id_supplier = :id;
+            */
             Log::info('Update supplier request:', [
                 'id' => $id,
                 'request' => $request->all()
@@ -139,6 +173,14 @@ class SupplierController extends Controller
      */
     public function destroy($id)  // Ubah parameter dari (Supplier $supplier)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | DELETE /supplier/{id}
+        |
+        | DELETE FROM suppliers WHERE id_supplier = :id;
+        */
         $supplier = Supplier::find($id);
         if($supplier) {
             $supplier->delete();
@@ -156,6 +198,15 @@ class SupplierController extends Controller
 
     public function downloadPDF()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /supplier/download/pdf
+        |
+        | SELECT *
+        | FROM suppliers;
+        */
         $suppliers = Supplier::all();
         $pdf = Pdf::loadView('supplier.export.pdf', compact('suppliers'));
         return $pdf->download('supplier.pdf');
@@ -163,6 +214,14 @@ class SupplierController extends Controller
 
     public function downloadExcel()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /supplier/download/excel
+        |
+        | (Query dasar sama seperti PDF, di-handle di App\Exports\SupplierExport)
+        */
         return Excel::download(new SupplierExport, 'supplier.xlsx');
     }
 

@@ -20,6 +20,29 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /produk?search=asus&kategori=Laptop&supplier=3&min_harga=1000000&max_harga=15000000
+        |
+        | SELECT p.*, s.*
+        | FROM produks p
+        | LEFT JOIN suppliers s ON p.id_supplier = s.id_supplier
+        | WHERE
+        |   (:search   IS NULL OR (
+        |       p.nama_produk   LIKE '%:search%' OR
+        |       p.kategori      LIKE '%:search%' OR
+        |       p.spesifikasi   LIKE '%:search%' OR
+        |       s.nama_supplier LIKE '%:search%'
+        |   ))
+        |   AND (:kategori  IS NULL OR p.kategori   = :kategori)
+        |   AND (:supplier  IS NULL OR p.id_supplier = :supplier)
+        |   AND (:min_harga IS NULL OR p.harga      >= :min_harga)
+        |   AND (:max_harga IS NULL OR p.harga      <= :max_harga)
+        | ORDER BY p.created_at DESC
+        | LIMIT 10 OFFSET (:page-1)*10;
+        */
         $query = Produk::with('supplier');
     
         // Filter berdasarkan pencarian
@@ -72,6 +95,17 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | POST /produk
+        |
+        | INSERT INTO produks
+        |   (nama_produk, kategori, id_supplier, harga, spesifikasi, foto_produk, stok)
+        | VALUES
+        |   (:nama_produk, :kategori, :id_supplier, :harga, :spesifikasi, :foto_path, :stok);
+        */
         $request->validate([
             'nama_produk' => 'required',
             'kategori' => 'required',
@@ -130,6 +164,22 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | PUT /produk/{id}
+        |
+        | UPDATE produks
+        | SET nama_produk = :nama_produk,
+        |     kategori    = :kategori,
+        |     id_supplier = :id_supplier,
+        |     harga       = :harga,
+        |     stok        = :stok,
+        |     spesifikasi = :spesifikasi,
+        |     foto_produk = :foto_produk -- kalau upload baru
+        | WHERE id_produk = :id;
+        */
         try {
             $produk = Produk::findOrFail($id);
             
@@ -204,6 +254,14 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | DELETE /produk/{id}
+        |
+        | DELETE FROM produks WHERE id_produk = :id;
+        */
         try {
             $produk = Produk::findOrFail($id);
             
@@ -228,6 +286,18 @@ class ProdukController extends Controller
 
     public function downloadPDF(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /produk/download/pdf?kategori=Laptop&supplier=3
+        |
+        | SELECT p.*, s.*
+        | FROM produks p
+        | LEFT JOIN suppliers s ON p.id_supplier = s.id_supplier
+        | WHERE (:kategori IS NULL OR p.kategori   = :kategori)
+        |   AND (:supplier IS NULL OR p.id_supplier = :supplier);
+        */
         // Debug full request
         Log::info('Full request: ' . json_encode($request->all()));
 
@@ -258,6 +328,14 @@ class ProdukController extends Controller
 
     public function downloadExcel(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | SQL Manual Query
+        |--------------------------------------------------------------------------
+        | GET /produk/download/excel?kategori=Laptop&supplier=3
+        |
+        | (Query sama konsepnya dengan PDF, di-handle di App\Exports\ProdukExport)
+        */
         return Excel::download(new ProdukExport($request), 'produk.xlsx');
     }
 }
