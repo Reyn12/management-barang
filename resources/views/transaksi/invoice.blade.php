@@ -26,7 +26,10 @@
     <div class="invoice-box">
         <h2>Invoice #{{ $transaksi->kode_transaksi }}</h2>
         <p>Tanggal: {{ date('d/m/Y', strtotime($transaksi->tgl_jual)) }}</p>
-        
+        @if($transaksi->nama_customer)
+        <p><strong>Customer:</strong> {{ $transaksi->nama_customer }}</p>
+        @endif
+
         <table class="table">
             <tr>
                 <th>Produk</th>

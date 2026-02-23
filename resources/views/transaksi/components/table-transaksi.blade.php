@@ -4,6 +4,7 @@
             <thead class="bg-blue-100 text-gray-600">
                 <tr>
                     <th class="px-4 py-3">Kode Transaksi</th>
+                    <th class="px-4 py-3">Nama Customer</th>
                     <th class="px-4 py-3">Tanggal Jual</th>
                     <th class="px-4 py-3">Produk</th>
                     <th class="px-4 py-3">Jumlah</th>
@@ -16,6 +17,7 @@
                 @forelse ($transaksis as $transaksi)
                     <tr class="hover:bg-gray-50 even:bg-gray-50">
                         <td class="px-4 py-3">{{ $transaksi->kode_transaksi }}</td>
+                        <td class="px-4 py-3">{{ $transaksi->nama_customer ?? '—' }}</td>
                         <td class="px-4 py-3">{{ date('d/m/Y', strtotime($transaksi->tgl_jual)) }}</td>
                         <td class="px-4 py-3">{{ $transaksi->produk->nama_produk }}</td>
                         <td class="px-4 py-3">{{ $transaksi->jumlah }}</td>
@@ -61,7 +63,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-4 py-3 text-center">Belum ada data transaksi</td>
+                        <td colspan="8" class="px-4 py-3 text-center">Belum ada data transaksi</td>
                     </tr>
                 @endforelse
             </tbody>

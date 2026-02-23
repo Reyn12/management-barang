@@ -11,19 +11,6 @@
                         <i class="fas fa-box text-blue-200"></i>
                     </div>
                 </div>
-                <div class="flex items-center gap-1 mt-3">
-                    @if($persentaseProduk > 0)
-                        <i class="fas fa-arrow-up text-emerald-400 text-sm"></i>
-                        <div class="text-emerald-400 text-sm">{{ number_format($persentaseProduk, 1) }}%</div>
-                    @elseif($persentaseProduk < 0)
-                        <i class="fas fa-arrow-down text-red-400 text-sm"></i>
-                        <div class="text-red-400 text-sm">{{ number_format(abs($persentaseProduk), 1) }}%</div>
-                    @else
-                        <i class="fas fa-minus text-blue-200 text-sm"></i>
-                        <div class="text-blue-200 text-sm">0%</div>
-                    @endif
-                    <div class="text-blue-200 text-sm">vs periode sebelumnya</div>
-                </div>
             </div>
         </div>
  
@@ -39,19 +26,6 @@
                         <i class="fas fa-chart-line text-rose-200"></i>
                     </div>
                 </div>
-                <div class="flex items-center gap-1 mt-3">
-                    @if($persentasePenjualan > 0)
-                        <i class="fas fa-arrow-up text-emerald-400 text-sm"></i>
-                        <div class="text-emerald-400 text-sm">{{ number_format($persentasePenjualan, 1) }}%</div>
-                    @elseif($persentasePenjualan < 0)
-                        <i class="fas fa-arrow-down text-red-400 text-sm"></i>
-                        <div class="text-red-400 text-sm">{{ number_format(abs($persentasePenjualan), 1) }}%</div>
-                    @else
-                        <i class="fas fa-minus text-rose-200 text-sm"></i>
-                        <div class="text-rose-200 text-sm">0%</div>
-                    @endif
-                    <div class="text-rose-200 text-sm">vs periode sebelumnya</div>
-                </div>
             </div>
         </div>
  
@@ -66,19 +40,6 @@
                 <div class="rounded-lg bg-indigo-800/50 p-3">
                     <i class="fas fa-building text-indigo-200"></i>
                 </div>
-            </div>
-            <div class="flex items-center gap-1 mt-3">
-                @if($persentaseSupplier > 0)
-                    <i class="fas fa-arrow-up text-emerald-400 text-sm"></i>
-                    <div class="text-emerald-400 text-sm">{{ number_format($persentaseSupplier, 1) }}%</div>
-                @elseif($persentaseSupplier < 0)
-                    <i class="fas fa-arrow-down text-red-400 text-sm"></i>
-                    <div class="text-red-400 text-sm">{{ number_format(abs($persentaseSupplier), 1) }}%</div>
-                @else
-                    <i class="fas fa-minus text-indigo-200 text-sm"></i>
-                    <div class="text-indigo-200 text-sm">0%</div>
-                @endif
-                <div class="text-indigo-200 text-sm">vs periode sebelumnya</div>
             </div>
         </div>
     </div>

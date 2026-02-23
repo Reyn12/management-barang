@@ -9,6 +9,7 @@ class Transaksi extends Model
     protected $primaryKey = 'id_transaksi';
     protected $fillable = [
         'kode_transaksi',
+        'nama_customer',
         'id_produk',
         'tgl_jual',
         'jumlah',

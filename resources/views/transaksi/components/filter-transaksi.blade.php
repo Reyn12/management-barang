@@ -178,6 +178,15 @@
                         
                         <!-- Kolom Kanan - Form -->
                         <div class="w-2/3 space-y-4">
+                            <!-- Nama Customer -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Customer</label>
+                                <input type="text" 
+                                       name="nama_customer" 
+                                       placeholder="Nama pembeli (opsional)"
+                                       class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200">
+                            </div>
+
                             <!-- Produk -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Produk</label>
@@ -222,12 +231,10 @@
                             <!-- Total Harga -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Total Harga</label>
-                                <input type="number" 
-                                       name="total_harga" 
-                                       x-model="totalHarga"
-                                       required
-                                       readonly
-                                       class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                <input type="hidden" name="total_harga" :value="totalHarga">
+                                <div x-text="totalHarga ? 'Rp ' + new Intl.NumberFormat('id-ID').format(totalHarga) : '—'"
+                                     class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-50 text-gray-900">
+                                </div>
                             </div>
 
                             <!-- Status Bayar -->

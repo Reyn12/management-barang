@@ -14,8 +14,13 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        // Get period from request, default to 6m
-        $period = $request->get('period', '6m');
+        // Custom date range: default 6 bulan lalu s/d hari ini
+        $dateFrom = $request->filled('date_from')
+            ? Carbon::parse($request->date_from)->startOfDay()
+            : now()->subMonths(6)->startOfDay();
+        $dateTo = $request->filled('date_to')
+            ? Carbon::parse($request->date_to)->endOfDay()
+            : now()->endOfDay();
         $kategoriData = Produk::select('kategori', DB::raw('count(*) as total'))
                      ->groupBy('kategori')
                      ->get();
@@ -68,34 +73,15 @@ class DashboardController extends Controller
         $stockData = $categoryStats->pluck('total_stok')->toArray();
         $salesData = $categoryStats->pluck('total_terjual')->toArray();
         
-        // Set date ranges based on period
-        switch($period) {
-            case '7d':
-                $startDate = now()->subDays(7);
-                $previousStartDate = now()->subDays(14);
-                break;
-            case '30d':
-                $startDate = now()->subDays(30);
-                $previousStartDate = now()->subDays(60);
-                break;
-            case '3m':
-                $startDate = now()->subMonths(3);
-                $previousStartDate = now()->subMonths(6);
-                break;
-            case '1y':
-                $startDate = now()->subYear();
-                $previousStartDate = now()->subYears(2);
-                break;
-            default: // 6m
-                $startDate = now()->subMonths(6);
-                $previousStartDate = now()->subMonths(12);
-        }
-        
-        $endDate = now();
-        $previousEndDate = $startDate;
+        // Periode sebelumnya untuk hitung persentase (same length sebelum dateFrom)
+        $rangeDays = $dateFrom->diffInDays($dateTo);
+        $previousEndDate = $dateFrom->copy()->subDay();
+        $previousStartDate = $previousEndDate->copy()->subDays($rangeDays);
+        $startDate = $dateFrom;
+        $endDate = $dateTo;
 
         // Total Penjualan + Persentase
-        $totalPenjualan = Transaksi::where('tgl_jual', '>=', $startDate)
+        $totalPenjualan = Transaksi::whereBetween('tgl_jual', [$startDate, $endDate])
                             ->sum('total_harga');
         $penjualanSebelumnya = Transaksi::whereBetween('tgl_jual', [
             $previousStartDate,
@@ -108,7 +94,7 @@ class DashboardController extends Controller
         }
 
         // Total Produk + Persentase
-        $totalProduk = Produk::where('created_at', '>=', $startDate)->count();
+        $totalProduk = Produk::whereBetween('created_at', [$startDate, $endDate])->count();
         $produkSebelumnya = Produk::whereBetween('created_at', [
             $previousStartDate,
             $previousEndDate
@@ -120,7 +106,7 @@ class DashboardController extends Controller
         }
 
         // Total Supplier + Persentase
-        $totalSupplier = Supplier::where('created_at', '>=', $startDate)->count();
+        $totalSupplier = Supplier::whereBetween('created_at', [$startDate, $endDate])->count();
         $supplierSebelumnya = Supplier::whereBetween('created_at', [
             $previousStartDate,
             $previousEndDate
@@ -133,17 +119,17 @@ class DashboardController extends Controller
 
         // Hitung jumlah transaksi per status (Belum Bayar | Sudah Bayar)
         $belumBayarCount = Transaksi::where('status_bayar', 'Belum Bayar')
-            ->where('tgl_jual', '>=', $startDate)
+            ->whereBetween('tgl_jual', [$startDate, $endDate])
             ->count();
         $sudahBayarCount = Transaksi::where('status_bayar', 'Sudah Bayar')
-            ->where('tgl_jual', '>=', $startDate)
+            ->whereBetween('tgl_jual', [$startDate, $endDate])
             ->count();
 
         $belumBayarTotal = Transaksi::where('status_bayar', 'Belum Bayar')
-            ->where('tgl_jual', '>=', $startDate)
+            ->whereBetween('tgl_jual', [$startDate, $endDate])
             ->sum('total_harga');
         $sudahBayarTotal = Transaksi::where('status_bayar', 'Sudah Bayar')
-            ->where('tgl_jual', '>=', $startDate)
+            ->whereBetween('tgl_jual', [$startDate, $endDate])
             ->sum('total_harga');
 
         // Data untuk chart 7 hari terakhir

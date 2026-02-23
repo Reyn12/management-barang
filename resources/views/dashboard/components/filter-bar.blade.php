@@ -1,38 +1,22 @@
 <div class="flex items-center justify-between">
     <div class="flex items-center gap-4">
-        <div class="relative">
-            <button onclick="toggleFilterDropdown('timeDropdown')" class="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">
-                <i class="far fa-calendar"></i>
-                <span>
-                    @switch(request('period', '6m'))
-                        @case('7d')
-                            Last 7 Days
-                            @break
-                        @case('30d')
-                            Last 30 Days
-                            @break
-                        @case('3m')
-                            Last 3 Month
-                            @break
-                        @case('1y')
-                            Last 1 Year
-                            @break
-                        @default
-                            Last 6 Month
-                    @endswitch
-                </span>
-                <i class="fas fa-chevron-down text-sm"></i>
-            </button>
-            <div id="timeDropdown" class="hidden absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 transform origin-top transition-all duration-200 opacity-0 scale-95">
-                <div class="">
-                    <a href="{{ route('dashboard', ['period' => '7d']) }}" class="block px-4 py-2 hover:bg-gray-100 {{ request('period') === '7d' ? 'bg-blue-50 text-blue-600' : '' }}">Last 7 Days</a>
-                    <a href="{{ route('dashboard', ['period' => '30d']) }}" class="block px-4 py-2 hover:bg-gray-100 {{ request('period') === '30d' ? 'bg-blue-50 text-blue-600' : '' }}">Last 30 Days</a>
-                    <a href="{{ route('dashboard', ['period' => '3m']) }}" class="block px-4 py-2 hover:bg-gray-100 {{ request('period') === '3m' ? 'bg-blue-50 text-blue-600' : '' }}">Last 3 Month</a>
-                    <a href="{{ route('dashboard', ['period' => '6m']) }}" class="block px-4 py-2 hover:bg-gray-100 {{ request('period', '6m') === '6m' ? 'bg-blue-50 text-blue-600' : '' }}">Last 6 Month</a>
-                    <a href="{{ route('dashboard', ['period' => '1y']) }}" class="block px-4 py-2 hover:bg-gray-100 {{ request('period') === '1y' ? 'bg-blue-50 text-blue-600' : '' }}">Last 1 Year</a>
-                </div>
+        <form action="{{ route('dashboard') }}" method="GET" class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center gap-2">
+                <i class="far fa-calendar text-gray-500"></i>
+                <label class="text-sm text-gray-600">Dari</label>
+                <input type="date" name="date_from" value="{{ request('date_from', now()->subMonths(6)->format('Y-m-d')) }}"
+                    class="border border-gray-300 px-3 py-2 rounded-lg text-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
             </div>
-        </div>
+            <div class="flex items-center gap-2">
+                <label class="text-sm text-gray-600">Sampai</label>
+                <input type="date" name="date_to" value="{{ request('date_to', now()->format('Y-m-d')) }}"
+                    class="border border-gray-300 px-3 py-2 rounded-lg text-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+            </div>
+            <button type="submit" class="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 text-sm">
+                <i class="fas fa-filter"></i>
+                <span>Terapkan</span>
+            </button>
+        </form>
     </div>
     <div class="flex items-center gap-4">
         <button onclick="refreshPage(this)" class="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">
@@ -109,46 +93,6 @@
 </div>
 
 <script>
-function toggleFilterDropdown(dropdownId) {
-    const dropdown = document.getElementById(dropdownId);
-    const allDropdowns = document.querySelectorAll('[id$="Dropdown"]');
-    
-    allDropdowns.forEach(d => {
-        if (d.id !== dropdownId) {
-            d.classList.add('hidden');
-            d.classList.remove('opacity-100', 'scale-100');
-            d.classList.add('opacity-0', 'scale-95');
-        }
-    });
-    
-    if (dropdown.classList.contains('hidden')) {
-        dropdown.classList.remove('hidden');
-        setTimeout(() => {
-            dropdown.classList.remove('opacity-0', 'scale-95');
-            dropdown.classList.add('opacity-100', 'scale-100');
-        }, 10);
-    } else {
-        dropdown.classList.remove('opacity-100', 'scale-100');
-        dropdown.classList.add('opacity-0', 'scale-95');
-        setTimeout(() => {
-            dropdown.classList.add('hidden');
-        }, 200);
-    }
-}
-
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.relative')) {
-        const allDropdowns = document.querySelectorAll('[id$="Dropdown"]');
-        allDropdowns.forEach(d => {
-            d.classList.remove('opacity-100', 'scale-100');
-            d.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                d.classList.add('hidden');
-            }, 200);
-        });
-    }
-});
-
 function refreshPage(button) {
     const icon = button.querySelector('i');
     icon.classList.add('animate-spin');

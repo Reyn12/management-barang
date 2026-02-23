@@ -45,7 +45,8 @@ class TransaksiController extends Controller
             $query->whereHas('produk', function($q) use ($search) {
                 $q->where('nama_produk', 'like', "%{$search}%");
             })
-            ->orWhere('id_transaksi', 'like', "%{$search}%");
+            ->orWhere('id_transaksi', 'like', "%{$search}%")
+            ->orWhere('nama_customer', 'like', "%{$search}%");
         }
 
         // Date filter
@@ -106,6 +107,7 @@ class TransaksiController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
+            'nama_customer' => 'nullable|string|max:255',
             'id_produk' => 'required|exists:produks,id_produk',
             'tgl_jual' => 'required|date',
             'jumlah' => 'required|integer|min:1',
@@ -174,6 +176,7 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::findOrFail($id);
         
         $request->validate([
+            'nama_customer' => 'nullable|string|max:255',
             'id_produk' => 'required',
             'jumlah' => 'required|numeric',
             'tgl_jual' => 'required|date',
@@ -202,6 +205,7 @@ class TransaksiController extends Controller
             $total_harga = $produk->harga * $request->jumlah;
         
             $transaksi->update([
+                'nama_customer' => $request->nama_customer,
                 'id_produk' => $request->id_produk,
                 'jumlah' => $request->jumlah,
                 'tgl_jual' => $request->tgl_jual,

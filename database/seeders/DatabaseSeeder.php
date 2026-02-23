@@ -405,6 +405,7 @@ class DatabaseSeeder extends Seeder
         DB::table('transaksis')->insert([
             [
                 'kode_transaksi' => 'TRX-0001',
+                'nama_customer' => 'Budi Santoso',
                 'id_produk' => 1,
                 'tgl_jual' => '2025-01-21',
                 'jumlah' => 2,
@@ -415,6 +416,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0002',
+                'nama_customer' => 'Siti Rahayu',
                 'id_produk' => 2,
                 'tgl_jual' => '2025-01-21', 
                 'jumlah' => 1,
@@ -425,6 +427,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0003',
+                'nama_customer' => 'Ahmad Wijaya',
                 'id_produk' => 3,
                 'tgl_jual' => '2025-01-15',
                 'jumlah' => 1,
@@ -435,6 +438,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0004',
+                'nama_customer' => 'Dewi Lestari',
                 'id_produk' => 4,
                 'tgl_jual' => '2024-12-28',
                 'jumlah' => 2,
@@ -445,6 +449,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0005',
+                'nama_customer' => 'Eko Prasetyo',
                 'id_produk' => 5,
                 'tgl_jual' => '2024-12-25',
                 'jumlah' => 3,
@@ -455,6 +460,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0006',
+                'nama_customer' => 'Fitri Handayani',
                 'id_produk' => 6,
                 'tgl_jual' => '2024-12-10',
                 'jumlah' => 1,
@@ -465,6 +471,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0007',
+                'nama_customer' => 'Rudi Hartono',
                 'id_produk' => 7,
                 'tgl_jual' => '2024-11-30',
                 'jumlah' => 2,
@@ -475,6 +482,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0008',
+                'nama_customer' => 'Ani Kusuma',
                 'id_produk' => 8,
                 'tgl_jual' => '2024-11-15',
                 'jumlah' => 4,
@@ -485,6 +493,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0009',
+                'nama_customer' => 'Hendra Gunawan',
                 'id_produk' => 9,
                 'tgl_jual' => '2024-10-28',
                 'jumlah' => 2,
@@ -495,6 +504,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0010',
+                'nama_customer' => 'Maya Sari',
                 'id_produk' => 10,
                 'tgl_jual' => '2024-10-15',
                 'jumlah' => 1,
@@ -505,6 +515,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0011',
+                'nama_customer' => 'Irfan Nugroho',
                 'id_produk' => 1,
                 'tgl_jual' => '2024-09-30',
                 'jumlah' => 3,
@@ -515,6 +526,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0012',
+                'nama_customer' => 'Linda Wulandari',
                 'id_produk' => 3,
                 'tgl_jual' => '2024-09-15',
                 'jumlah' => 2,
@@ -525,6 +537,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0013',
+                'nama_customer' => 'Agus Setiawan',
                 'id_produk' => 5,
                 'tgl_jual' => '2024-08-30',
                 'jumlah' => 2,
@@ -535,6 +548,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0014',
+                'nama_customer' => 'Yuni Astuti',
                 'id_produk' => 7,
                 'tgl_jual' => '2024-08-15',
                 'jumlah' => 1,
@@ -545,6 +559,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0015',
+                'nama_customer' => 'Bambang Sudirman',
                 'id_produk' => 9,
                 'tgl_jual' => '2024-08-01',
                 'jumlah' => 3,
@@ -556,6 +571,7 @@ class DatabaseSeeder extends Seeder
             // tambahan (kode unik TRX-0016 s/d TRX-0025)
             [
                 'kode_transaksi' => 'TRX-0016',
+                'nama_customer' => 'Rina Melati',
                 'id_produk' => 6,
                 'tgl_jual' => '2025-01-24',
                 'jumlah' => 1,
@@ -566,6 +582,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0017',
+                'nama_customer' => 'Fajar Ramadhan',
                 'id_produk' => 7,
                 'tgl_jual' => '2025-01-23',
                 'jumlah' => 2,
@@ -576,6 +593,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0018',
+                'nama_customer' => 'Nurul Huda',
                 'id_produk' => 8,
                 'tgl_jual' => '2025-01-22',
                 'jumlah' => 1,
@@ -586,6 +604,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0019',
+                'nama_customer' => 'Dian Permata',
                 'id_produk' => 9,
                 'tgl_jual' => '2025-01-20',
                 'jumlah' => 1,
@@ -596,6 +615,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0020',
+                'nama_customer' => 'Rizky Pratama',
                 'id_produk' => 10,
                 'tgl_jual' => '2025-01-19',
                 'jumlah' => 3,
@@ -606,6 +626,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0021',
+                'nama_customer' => 'Wulan Dari',
                 'id_produk' => 11,
                 'tgl_jual' => '2025-01-18',
                 'jumlah' => 2,
@@ -616,6 +637,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0022',
+                'nama_customer' => 'Andi Saputra',
                 'id_produk' => 12,
                 'tgl_jual' => '2025-01-17',
                 'jumlah' => 1,
@@ -626,6 +648,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0023',
+                'nama_customer' => 'Kartika Dewi',
                 'id_produk' => 1,
                 'tgl_jual' => '2025-01-16',
                 'jumlah' => 2,
@@ -636,6 +659,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0024',
+                'nama_customer' => 'Dimas Aditya',
                 'id_produk' => 2,
                 'tgl_jual' => '2025-01-15',
                 'jumlah' => 1,
@@ -646,6 +670,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'kode_transaksi' => 'TRX-0025',
+                'nama_customer' => 'Putri Maharani',
                 'id_produk' => 3,
                 'tgl_jual' => '2025-01-14',
                 'jumlah' => 2,

@@ -24,6 +24,7 @@
             <tr>
                 <th>No</th>
                 <th>Kode Transaksi</th>
+                <th>Nama Customer</th>
                 <th>Tanggal Jual</th>
                 <th>Produk</th>
                 <th>Jumlah</th>
@@ -36,6 +37,7 @@
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $transaksi->kode_transaksi }}</td>
+                <td>{{ $transaksi->nama_customer ?? '—' }}</td>
                 <td>{{ $transaksi->tgl_jual }}</td>
                 <td>{{ $transaksi->produk->nama_produk }}</td>
                 <td>{{ $transaksi->jumlah }}</td>

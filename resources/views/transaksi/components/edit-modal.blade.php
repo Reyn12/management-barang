@@ -46,6 +46,16 @@
                                 @csrf
                                 @method('PUT')
                                 
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="nama_customer">
+                                        Nama Customer
+                                    </label>
+                                    <input type="text" name="nama_customer" id="nama_customer" 
+                                           value="{{ $transaksi->nama_customer }}" 
+                                           placeholder="Nama pembeli (opsional)"
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                </div>
+
                                 <div class="grid grid-cols-2 gap-4">
                                     <!-- Kolom Kanan Bagian 1 -->
                                     <div>

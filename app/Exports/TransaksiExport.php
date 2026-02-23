@@ -47,6 +47,7 @@ class TransaksiExport implements FromCollection, WithHeadings, WithMapping, Shou
         return [
             'ID Transaksi',
             'Kode Transaksi',
+            'Nama Customer',
             'ID Produk',
             'Nama Produk',
             'Nama Supplier',
@@ -64,6 +65,7 @@ class TransaksiExport implements FromCollection, WithHeadings, WithMapping, Shou
         return [
             $transaksi->id_transaksi,
             $transaksi->kode_transaksi,
+            $transaksi->nama_customer ?? '—',
             $transaksi->id_produk,
             $transaksi->produk->nama_produk,
             $transaksi->produk->supplier->nama_supplier,
